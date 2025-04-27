@@ -1,0 +1,22 @@
+{
+  "chat": {
+    "openai": [
+      { "name": "gpt-4.1", "price": { "input": 2, "output": 8 } },
+      { "name": "gpt-4.1-mini", "price": { "input": 0.4, "output": 1.6 } },
+      { "name": "gpt-4.1-nano", "price": { "input": 0.1, "output": 0.4 } }
+    ],
+    "deepseek": [{ "name": "deepseek-chat", "price": { "input": 0.07, "output": 1.1 } }]
+  },
+  "reasoning": {
+    "openai": [
+      { "name": "o1-pro", "price": { "input": 150.0, "output": 600.0 } },
+      { "name": "o1", "price": { "input": 15.0, "output": 60.0 } },
+      { "name": "o3", "price": { "input": 10.0, "output": 40.0 } },
+      { "name": "o4-mini", "price": { "input": 1.1, "output": 4.4 } }
+    ],
+    "deepseek": [{ "name": "deepseek-reasoner", "price": { "input": 0.14, "output": 2.19 } }]
+  },
+  "images": {
+    "openai": ["dall-e-3"]
+  }
+}

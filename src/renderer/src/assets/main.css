@@ -1,0 +1,29 @@
+@import './fonts.css';
+@import './lds-ring.css';
+
+body {
+  font-family: 'Poppins-Regular';
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+th,
+td {
+  border-bottom: none !important;
+}
+
+.aside {
+  padding: 8px;
+  height: calc(100% - 16px);
+}
+.aside-content {
+  padding: 8px;
+  background-color: #f2f2f2;
+  height: calc(100% - 16px);
+  border-radius: 16px;
+}
