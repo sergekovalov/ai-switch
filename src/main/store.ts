@@ -2,12 +2,12 @@ import { app } from 'electron'
 import fs from 'node:fs'
 import path from 'node:path'
 import { Singleton } from './decorators/singleton.decorator'
-import { TStoreConfig } from './types/store-config.type'
+import { TAISource, TAppConfig } from './types/app-config.type'
 import { DEFAULT_STORE_CONFIG } from './constants'
 
 @Singleton
 export class Store {
-  public config: TStoreConfig
+  private config: TAppConfig
   private filePath: string
 
   constructor() {
@@ -19,10 +19,20 @@ export class Store {
       fs.writeFileSync(this.filePath, JSON.stringify(DEFAULT_STORE_CONFIG), 'utf-8')
     }
 
-    this.data = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'))
+    this.config = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'))
+    console.log('>>>', this.config)
   }
 
-  public async persist(): Promise<void> {
-    await fs.promises.writeFile(this.filePath, JSON.stringify(this.data), 'utf-8')
+  public getConfig(): TAppConfig {
+    return this.config
+  }
+
+  public setSources(aiSources: TAISource[]) {
+    this.config.sources = aiSources
+    this.commit()
+  }
+
+  private async commit(): Promise<void> {
+    await fs.promises.writeFile(this.filePath, JSON.stringify(this.config), 'utf-8')
   }
 }

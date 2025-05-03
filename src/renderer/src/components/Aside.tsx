@@ -1,41 +1,71 @@
-import { Box } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import Tile from './Tile'
-import { usePage } from '@renderer/store/page'
-import { Pages } from 'src/renderer/types/pages.enum'
 import Text from './Text'
+import { useAppConfig } from '@/store/app-config'
+import { useCallback, useEffect, useState } from 'react'
+import { Flex } from './Flex'
+import AddBoxIcon from '@mui/icons-material/AddBox'
+import SettingsIcon from '@mui/icons-material/Settings'
+import { TChat } from '@/types/app-config.type'
 
 const Aside = () => {
-  const [page, setPage] = usePage()
+  const [appConfig, setAppConfig] = useAppConfig()
+
+  const selectChat = useCallback(
+    (chatIndex: number) => {
+      appConfig.chats.selectedChatIndex = chatIndex
+      setAppConfig(appConfig)
+    },
+    [appConfig]
+  )
+
+  useEffect(() => {
+    if (appConfig.chats.list.length && appConfig.chats.selectedChatIndex === -1) {
+      selectChat(0)
+    }
+  }, [appConfig])
+
+  const addNewChat = useCallback(() => {
+    appConfig.chats.list.push({
+      model: appConfig.sources[0].name,
+      name: `New Chat ${appConfig.chats.list.length + 1}`,
+      messages: []
+    })
+    appConfig.chats.selectedChatIndex = appConfig.chats.list.length - 1
+
+    setAppConfig({ ...appConfig })
+  }, [appConfig])
 
   return (
     <Box className="aside">
+      <Box className="aside-header">
+        <Flex justifyContent="space-between">
+          <SettingsIcon fontSize="medium" className="clickable anim-pulse-on-hover" />
+          <AddBoxIcon
+            fontSize="medium"
+            className="clickable anim-pulse-on-hover"
+            onClick={addNewChat}
+          />
+        </Flex>
+      </Box>
       <Box className="aside-content">
-        <Tile
-          className="clickable"
-          sx={{ mb: 1, bgcolor: page === Pages.DASHBOARD ? '#606060' : '#303030' }}
-          onClick={() => setPage(Pages.DASHBOARD)}
-        >
-          <Text>Dashboard</Text>
-        </Tile>
-
-        <Tile
-          className="clickable"
-          sx={{
-            mb: 1,
-            bgcolor: [Pages.USERS, Pages.USER].includes(page) ? '#606060' : '#303030'
-          }}
-          onClick={() => setPage(Pages.USERS)}
-        >
-          <Text>Users</Text>
-        </Tile>
-
-        <Tile
-          className="clickable"
-          sx={{ bgcolor: page === Pages.MARKETPLACE ? '#606060' : '#303030' }}
-          onClick={() => setPage(Pages.MARKETPLACE)}
-        >
-          <Text>Marketplace asdasd</Text>
-        </Tile>
+        <Stack direction="column" spacing={0.5}>
+          {appConfig.chats.list.map((chat: TChat, index: number) => (
+            <Tile
+              className="clickable"
+              sx={{
+                bgcolor:
+                  appConfig.chats.selectedChatIndex === index ? 'rgba(0,0,0,0.1)' : 'transparent',
+                border: 0,
+                boxShadow: 'none',
+                p: 1
+              }}
+              onClick={() => selectChat(index)}
+            >
+              <Text>{chat.name}</Text>
+            </Tile>
+          ))}
+        </Stack>
       </Box>
     </Box>
   )

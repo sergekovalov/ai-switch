@@ -1,6 +1,9 @@
-import { TAppConfig } from './types/app-config.type'
+import { TAppConfig } from '@/types/app-config.type'
 
-export const REPO_URL = 'https://raw.githubusercontent.com/sergekovalov/ai-switch/refs/heads/main'
+export enum AISources {
+  openai = 'openai',
+  deepseek = 'deepseek'
+}
 
 export const DEFAULT_STORE_CONFIG: TAppConfig = {
   version: '',

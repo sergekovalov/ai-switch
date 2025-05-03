@@ -20,10 +20,18 @@ td {
 .aside {
   padding: 8px;
   height: calc(100% - 16px);
+  display: flex;
+  flex-direction: column;
+}
+.aside-header {
+  padding: 4px 8px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 .aside-content {
-  padding: 8px;
+  padding: 4px;
   background-color: #f2f2f2;
-  height: calc(100% - 16px);
-  border-radius: 16px;
+  border-radius: 8px;
+  flex: 1;
 }

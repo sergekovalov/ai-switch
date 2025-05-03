@@ -7,8 +7,9 @@ const sizes = {
 }
 
 export const BOX_SHADOW = {
-  REGULAR: '0px 4px 8px -8px rgba(150,150,150,0.75)',
-  STRONG: '0px 4px 12px -8px rgba(89,89,89,0.75)'
+  SOFT: '0px 4px 8px -8px rgba(120,120,120,0.75)',
+  MEDIUM: '0px 4px 12px -8px rgba(89,89,89,0.75)',
+  STRONG: '0px 18px 16px -24px rgba(0,0,0,0.5)'
 }
 
 export const createMediaQueries = ({ breakpoints, callback }) =>

@@ -1,5 +1,5 @@
-import { Pages } from 'src/renderer/types/pages.enum'
 import { atom, useAtom } from 'jotai'
+import { Pages } from '@/types/pages.enum'
 
 export const PageAtom = atom<Pages>(Pages.DASHBOARD)
 

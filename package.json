@@ -1,9 +1,9 @@
 {
-  "name": "learnlenny-admin-app",
-  "version": "1.0.0",
+  "name": "ai-switch",
+  "version": "0.0.1",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
-  "author": "example.com",
+  "author": "moiserge.k@gmail.com",
   "homepage": "https://electron-vite.org",
   "scripts": {
     "format": "prettier --write .",
@@ -25,15 +25,19 @@
     "@electron-toolkit/utils": "^4.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "axios": "^1.9.0",
+    "compare-versions": "^6.1.1",
     "dayjs": "^1.11.13",
     "electron-updater": "^6.6.2",
+    "formik": "^2.4.6",
     "jotai": "^2.12.3",
     "openai": "^4.96.0",
     "qs": "^6.14.0",
     "react-dom": "^19.1.0",
-    "universal-cookie": "^7.1.0"
+    "universal-cookie": "^7.1.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",
