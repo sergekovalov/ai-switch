@@ -35,3 +35,12 @@ td {
   border-radius: 8px;
   flex: 1;
 }
+
+.chat-message-system {
+  background-color: #fff;
+  border-radius: 16px 16px 16px 0;
+}
+.chat-message-user {
+  background-color: rgb(100, 232, 118);
+  border-radius: 16px 16px 0 16px;
+}

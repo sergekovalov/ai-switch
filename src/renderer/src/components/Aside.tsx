@@ -14,7 +14,7 @@ const Aside = () => {
   const selectChat = useCallback(
     (chatIndex: number) => {
       appConfig.chats.selectedChatIndex = chatIndex
-      setAppConfig(appConfig)
+      setAppConfig({ ...appConfig })
     },
     [appConfig]
   )
@@ -27,9 +27,10 @@ const Aside = () => {
 
   const addNewChat = useCallback(() => {
     appConfig.chats.list.push({
-      model: appConfig.sources[0].name,
       name: `New Chat ${appConfig.chats.list.length + 1}`,
-      messages: []
+      source: appConfig.sources[0].name,
+      messages: [],
+      model: appConfig.aiModels.chat[appConfig.sources[0].name][0].name as string
     })
     appConfig.chats.selectedChatIndex = appConfig.chats.list.length - 1
 

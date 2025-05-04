@@ -1,19 +1,56 @@
-import { Box } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import { Flex } from '../Flex'
 import StyledTextField from '../StyledForm/StyledTextField'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAppConfig } from '@/store/app-config'
-import { TChat, TChatMessage } from '@/types/app-config.type'
+import { TChat, TChatMessage, TChatMessageRole } from '@/types/app-config.type'
 import { ChatMessage } from './ChatMessage'
+import { AIClient } from '@/utils/ai-clients/ai-client'
+
+let shiftPressed = false
 
 export const ChatContent = () => {
-  const [appConfig] = useAppConfig()
-  const [chat] = useState<TChat>(appConfig.chats.list[appConfig.chats.selectedChatIndex])
+  const [appConfig, setAppConfig] = useAppConfig()
+  const [chat, setChat] = useState<TChat>(appConfig.chats.list[appConfig.chats.selectedChatIndex])
   const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState<TChatMessage[]>(chat.messages)
 
-  const sendMessage = useCallback((text: string) => {
-    
-  }, [])
+  useEffect(() => {
+    setChat(appConfig.chats.list[appConfig.chats.selectedChatIndex])
+  }, [appConfig])
+
+  useEffect(() => {
+    chat.messages = messages
+
+    setAppConfig({ ...appConfig })
+  }, [messages])
+
+  const sendMessage = useCallback(
+    async (prompt: string) => {
+      setMessages([
+        ...messages,
+        {
+          role: TChatMessageRole.user,
+          content: prompt
+        }
+      ])
+
+      const resp = await new AIClient({
+        apiKey: appConfig.sources.find(({ name }) => name === chat.source)?.apiKey as string,
+        model: chat.model,
+        source: chat.source
+      }).sendChatMessage(prompt)
+
+      setMessages((prev: TChatMessage[]) => [
+        ...prev,
+        {
+          role: TChatMessageRole.system,
+          content: resp
+        }
+      ])
+    },
+    [appConfig, chat]
+  )
 
   return (
     <Flex
@@ -25,10 +62,12 @@ export const ChatContent = () => {
         borderRadius: '8px'
       }}
     >
-      <Box sx={{ flex: 1 }}>
-        {chat.messages.map((chatMessage: TChatMessage) => (
-          <ChatMessage message={chatMessage} />
-        ))}
+      <Box sx={{ flex: 1, width: '100%' }}>
+        <Stack direction="column" spacing={0.5}>
+          {chat.messages.map((chatMessage: TChatMessage) => (
+            <ChatMessage message={chatMessage} />
+          ))}
+        </Stack>
       </Box>
       <Box sx={{ width: '100%' }}>
         <StyledTextField
@@ -50,10 +89,19 @@ export const ChatContent = () => {
           onChange={(e) => {
             setMessage(e.target.value)
           }}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+          onKeyDown={(e) => {
+            if (e.key === 'Shift') {
+              shiftPressed = true
+            }
+            if (e.key === 'Enter' && !shiftPressed && message.trim().length) {
+              e.preventDefault()
               sendMessage(message)
               setMessage('')
+            }
+          }}
+          onKeyUp={(e) => {
+            if (e.key === 'Shift') {
+              shiftPressed = false
             }
           }}
         />

@@ -9,9 +9,13 @@ type TProps = {
 
 export const ChatMessage = ({ message }: TProps) => {
   return (
-    <Flex justifyContent={message.role === TChatMessageRole.user ? 'flex-end' : 'flex-start'}>
-      <Box sx={{ p: 1 }}>
-        <Text>{message.content}</Text>
+    <Flex
+      justifyContent={message.role === TChatMessageRole.user ? 'flex-end' : 'flex-start'}
+    >
+      <Box className={`chat-message-${message.role}`} sx={{ p: 1 }}>
+        {message.content.split('\n').map((text: string) => (
+          <Text>{text}</Text>
+        ))}
       </Box>
     </Flex>
   )

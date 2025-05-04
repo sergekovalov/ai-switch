@@ -26,7 +26,9 @@ export type TChatMessage = {
 
 export type TChat = {
   name: string
+  source: string
   model: string
+  config?: Record<string, any>
   selected?: boolean
   messages: TChatMessage[]
 }
@@ -38,7 +40,7 @@ export type TChats = {
 
 export type TAppConfig = {
   version: string
-  aiModels?: TAIModelsConfig
+  aiModels: TAIModelsConfig
   sources: TAISource[]
   chats: TChats
 }

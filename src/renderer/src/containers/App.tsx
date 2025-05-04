@@ -55,7 +55,8 @@ export const App = () => {
       })
     } else {
       appConfig.chats.list.push({
-        model: appConfig.sources[0].name,
+        source: appConfig.sources[0].name,
+        model: appConfig.aiModels.chat[appConfig.sources[0].name][0].name as string,
         name: 'New Chat',
         messages: []
       })
