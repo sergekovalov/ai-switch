@@ -18,29 +18,31 @@ td {
 }
 
 .aside {
-  padding: 8px;
-  height: calc(100% - 16px);
+  height: 100%;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
 }
 .aside-header {
-  padding: 4px 8px;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  margin-bottom: 8px;
+  padding: 8px;
 }
 .aside-content {
-  padding: 4px;
+  padding: 8px;
   background-color: #f2f2f2;
-  border-radius: 8px;
   flex: 1;
+}
+
+.chat-message {
+  max-width: 80%;
 }
 
 .chat-message-system {
   background-color: #fff;
   border-radius: 16px 16px 16px 0;
+  border: 1px solid #c0c0c0;
 }
 .chat-message-user {
   background-color: rgb(100, 232, 118);
   border-radius: 16px 16px 0 16px;
+  border: 1px solid rgb(54, 195, 73);
 }

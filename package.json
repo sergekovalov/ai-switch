@@ -36,6 +36,7 @@
     "openai": "^4.96.0",
     "qs": "^6.14.0",
     "react-dom": "^19.1.0",
+    "showdown": "^2.1.0",
     "universal-cookie": "^7.1.0",
     "yup": "^1.6.1"
   },
@@ -47,6 +48,7 @@
     "@types/qs": "^6.9.18",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@types/showdown": "^2.0.6",
     "@vitejs/plugin-react": "^4.4.1",
     "electron": "^35.2.1",
     "electron-builder": "^26.0.12",

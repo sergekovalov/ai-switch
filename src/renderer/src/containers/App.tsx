@@ -101,21 +101,19 @@ export const App = () => {
               </Box>
             </Tile>
           ) : (
-            <Grid container sx={{ flex: 1 }}>
+            <Grid container sx={{ flex: 1, height: 'calc(100% - 20px)' }}>
               <Grid size={{ xs: 12, sm: 4, md: 3, lg: 2 }}>
                 <Aside />
               </Grid>
-              <Grid size={{ xs: 4, sm: 8, md: 9, lg: 10 }}>
-                <Box sx={{ height: 'calc(100% - 16px)', p: 1 }}>
-                  <ChatContent />
-                </Box>
+              <Grid size={{ xs: 4, sm: 8, md: 9, lg: 10 }} sx={{ height: '100%' }}>
+                <ChatContent />
               </Grid>
             </Grid>
           )}
 
-          <Box sx={{ p: 0.5, bgcolor: '#e5e5e5' }}>
+          <Flex alignItems="center" sx={{ bgcolor: '#e5e5e5', height: '20px', padding: '0 8px' }}>
             <Text size="xs">Footer</Text>
-          </Box>
+          </Flex>
         </Box>
       ) : (
         <ContentPreloader />

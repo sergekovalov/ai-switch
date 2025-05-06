@@ -55,15 +55,16 @@ export const ChatContent = () => {
   return (
     <Flex
       sx={{
-        height: 'calc(100% - 8px)',
+        height: 'calc(100% - 24px)',
         flexDirection: 'column',
         bgcolor: '#f2f2f2',
         p: 0.5,
+        m: 1,
         borderRadius: '8px'
       }}
     >
-      <Box sx={{ flex: 1, width: '100%' }}>
-        <Stack direction="column" spacing={0.5}>
+      <Box sx={{ flex: 1, width: 'calc(100% - 64px)', height: '100%', overflowY: 'auto', p: 4 }}>
+        <Stack direction="column" spacing={1}>
           {chat.messages.map((chatMessage: TChatMessage) => (
             <ChatMessage message={chatMessage} />
           ))}
